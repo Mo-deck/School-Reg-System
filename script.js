@@ -8,7 +8,20 @@ class Student{
 
 }
 
-class Commonds{}
+class Commond{
+    registerNewStudent(student){
+        const allStudent = document.getElementById("all-students")
+        const row = document.createElement('tr')
+        row.innerHTML = `
+        <td>${student.firstName}</td>
+        <td>${student.lastName}</td>
+        <td>${student.idNumber}</td>
+        <td><${student.ClassRoom}</td>
+        <td><a href= "#" class="remove-student>❌</td>
+        `;
+        allStudent.appendChild(row);
+    }
+}
 const handleFormSubmit = (e) =>{
     e.preventDefault()
     const firstName =  document.getElementById("firstName").value
@@ -16,9 +29,11 @@ const handleFormSubmit = (e) =>{
     const idNumber =  document.getElementById("idNumber").value
     const ClassRoom =  document.getElementById("ClassRoom").value
 
-    console.log(firstName,lastName,idNumber,ClassRoom);
-    
-}
+    const student = new Student(firstName,lastName,idNumber,ClassRoom) 
 
+    // register new Student
+    const command = new Commond()
+    command.registerNewStudent(student);
+}
 // event listeners
 document.getElementById("book-form").addEventListener('submit',handleFormSubmit)

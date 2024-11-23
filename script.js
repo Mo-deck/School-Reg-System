@@ -21,6 +21,12 @@ class Commond{
         `;
         allStudent.appendChild(row);
     }
+    clearAllInputs(){
+        document.getElementById('firstName').value = "";
+        document.getElementById('lastName').value = "";
+        document.getElementById('idNumber').value = "";
+        document.getElementById('ClassRoom').value = "";
+    }
 }
 const handleFormSubmit = (e) =>{
     e.preventDefault()
@@ -34,6 +40,7 @@ const handleFormSubmit = (e) =>{
     // register new Student
     const command = new Commond()
     command.registerNewStudent(student);
+    clearAllInputs();
 }
 // event listeners
 document.getElementById("book-form").addEventListener('submit',handleFormSubmit)

@@ -40,13 +40,19 @@ class Commond{
             document.querySelector('.alert').remove()
         }, 2000);
     }
+
+    deleteStudent(element){
+        if(element.className === 'remove-student'){
+            element.parentElement.parentElement.remove()
+        }
+    }
 }
 const handleFormSubmit = (e) =>
     e.preventDefault()
-    const firstName =  document.getElementById("firstName").value
-    const lastName =  document.getElementById("Lastname").value
-    const idNumber =  document.getElementById("idNumber").value
-    const ClassRoom =  document.getElementById("ClassRoom").value
+    const firstName = document.querySelector('#firstName').value
+    const lastName = document.querySelector('#Lastname').value
+    const idNumber = document.querySelector('#idNumber').value
+    const ClassRoom = document.querySelector('#ClassRoom').value
 
     const student = new Student(firstName,lastName,idNumber,ClassRoom) 
 
@@ -56,8 +62,17 @@ const handleFormSubmit = (e) =>
         command.displayAlert("Please fill out all the input", "alert-warning")
     }else{
         command.registerNewStudent(student);
+        command.displayAlert("New Student Added to the list", "alert-success")
         command.clearAllInputs();
     }
 
 // event listeners
 document.getElementById("student-form").addEventListener('submit',handleFormSubmit)
+
+document.getElementById("all-student").addEventListener('click', function(e){
+    const command = new Commond()
+    command.deleteStudent(e.target)
+
+    command.displayAlert('Student deleted Successfully', "alert-success")
+    e.preventDefault()
+})

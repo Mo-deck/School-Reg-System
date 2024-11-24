@@ -27,8 +27,21 @@ class Commond{
         document.getElementById('idNumber').value = "";
         document.getElementById('ClassRoom').value = "";
     }
+
+    displayAlert(message, className){
+        const div = document.createElement("div")
+        div.className = `alert ${className}`;
+        div.appendChild(document.createTextNode(message));
+        const container = document.querySelector(".container")
+        const form = document.getElementById("student-form")
+
+        container.insertBefore(div, form)
+        setTimeout(() =>{
+            document.querySelector('.alert').remove()
+        }, 2000);
+    }
 }
-const handleFormSubmit = (e) =>{
+const handleFormSubmit = (e) =>
     e.preventDefault()
     const firstName =  document.getElementById("firstName").value
     const lastName =  document.getElementById("Lastname").value
@@ -39,8 +52,12 @@ const handleFormSubmit = (e) =>{
 
     // register new Student
     const command = new Commond()
-    command.registerNewStudent(student);
-    clearAllInputs();
-}
+    if(firstName === "" || lastName === "" || idNumber === ""){
+        command.displayAlert("Please fill out all the input", "alert-warning")
+    }else{
+        command.registerNewStudent(student);
+        command.clearAllInputs();
+    }
+
 // event listeners
-document.getElementById("book-form").addEventListener('submit',handleFormSubmit)
+document.getElementById("student-form").addEventListener('submit',handleFormSubmit)
